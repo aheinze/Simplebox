@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Simplebox demo</title>
+		<link rel="stylesheet" href="css/style.css" /> 
+		<link rel="stylesheet" href="css/simplebox.css" /> 
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.js"></script>
+		<script type="text/javascript" src="js/simplebox.js"></script>
+		<script type="text/javascript">
+			jQuery(function($) {
+                
+                $("#btnDemo").bind("click", function(){
+                
+                    $.simplebox.show('test',{
+                      title: 'Test caption',
+					  
+                      buttons: {
+                        Close: function(){
+                            this.close();
+                        }  
+                      }
+                    });
+                });
+				
+				
+                $("#btnDemo2").bind("click", function(){
+                
+                    $.simplebox.show('test',{
+                      title: 'Test caption',
+                      theme: "dark",
+					  
+                      buttons: {
+                        Close: function(){
+                            this.close();
+                        }  
+                      }
+                    });
+                });
+				
+				$("#btnAlert").bind("click", function(){
+                    $.simplebox.alert('This is an alert!');
+                });
+				
+				$("#btnConfirm").bind("click", function(){
+                    $.simplebox.confirm('Message to confirm', function(){
+						alert("Yep, confirmed!");
+						this.close();
+					});
+                });
+				
+			});	
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+            <h1>Simplebox</h1>
+            
+            <p>
+                ... just a simple box.
+            </p>
+            
+            <p>
+                <button id="btnDemo">Click me</button> 
+                <button id="btnDemo2">Dark theme</button>
+            </p>
+			
+			<h2>Usage</h2>
+			<p class="test">
+<pre>
+$.simplebox.show(content, <span style="color:#999;">{
+	//settings
+	'title'     : false,
+	'closeOnEsc': true,
+	'theme'     : 'default',
+	'height'    : 'auto',
+	'width'     : 'auto',
+	'speed'     : 500,
+	'easing'    : 'swing',
+	'buttons'   : false,
+
+	//events
+	'beforeShow'  : function(){},
+	'beforeClose' : function(){},
+	'onClose'     : function(){}
+}</span>);
+</pre>
+				
+				where content could be a string, dom element or jQuery element.
+			</p>
+			
+			<h2>Shortcuts</h2>
+			<p>
+                <button id="btnAlert">Alert</button>
+<pre>
+$.simplebox.alert("...")
+</pre>
+
+                <button id="btnConfirm">Confirm</button>
+<pre>
+$.simplebox.confirm("...", function(){ 
+	//your callback code
+});
+</pre>
+			</p>     
+        
+        <h2>Code</h2>
+        <p><a href="https://github.com/aheinze/Simplebox">Fork me on github</a></p>
+            
+        </div>
+
+	</body>
+</html>
