@@ -128,6 +128,11 @@
                     'left': ($(window).width()/2-$this.box.width()/2),
 					'top': ($(window).height()/2-$this.box.height()/2)
                 });
+				
+				$this.overlay.hide().css({
+                    width: $(document).width(),
+                    height: $(document).height()
+                }).show();
             });
             
             // bind esc
