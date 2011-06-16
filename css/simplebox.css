@@ -80,6 +80,21 @@
   border-radius: 4px;
 }
 
+.simplebox-prevbutton, .simplebox-nextbutton{
+	position: absolute;
+	top: 30px;
+	width: 24px;height: 43px;
+	cursor: pointer;
+}
+.simplebox-prevbutton{
+	left: -24px;
+	background: transparent url(images/prev.png) 50% 50% no-repeat;
+}
+.simplebox-nextbutton{
+	right: -24px;
+	background: transparent url(images/next.png) 50% 50% no-repeat;
+}
+
 #simplebox-overlay {
     z-index: 999;
     background: #222d3f;

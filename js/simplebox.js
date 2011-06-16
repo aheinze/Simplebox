@@ -27,6 +27,8 @@
                 'speed'     : 500,
                 'easing'    : 'swing',
 				'buttons'   : false,
+				'gallery'   : false,
+				'gallery_current' : 0,
 
                 //events
                 'beforeShow'  : function(){},
@@ -36,6 +38,15 @@
 			
             var tplDlg = '<div class="simplebox-window '+$this.options.theme+'">';
                 tplDlg+=  '<div class="simplebox-closebutton"></div>';
+                
+				if(this.options.gallery && this.options.gallery[this.options.gallery_current+1]) {
+					tplDlg +=  '<div class="simplebox-nextbutton"></div>';
+				}
+
+				if(this.options.gallery && this.options.gallery[this.options.gallery_current-1]) {
+					tplDlg +=  '<div class="simplebox-prevbutton"></div>';
+				}
+				
                 tplDlg+=  '<div class="simplebox-title" style="display:none;"></div>';
                 tplDlg+=  '<div class="simplebox-content"><div class="simplebox-innercontent"></div></div>';
 				tplDlg+=  '<div class="simplebox-buttonsbar"><div class="simplebox-buttons"></div></div>';
@@ -61,6 +72,17 @@
             }else{
                this.box.find(".simplebox-buttonsbar").hide(); 
             }
+			
+			if(this.options.gallery){
+
+				this.box.find(".simplebox-nextbutton").one("click", function(){
+					$($this.options.gallery.get($this.options.gallery_current+1)).click();
+				});
+				
+				this.box.find(".simplebox-prevbutton").one("click", function(){
+					$($this.options.gallery.get($this.options.gallery_current-1)).click();
+				});
+			}
             
             if($this.options.height != 'auto'){
                 this.box.find(".simplebox-innercontent").css({
@@ -75,7 +97,7 @@
                   'overflow-x': 'auto'
                 });
             }
-      
+			
             this.setContent(content).setTitle(this.options.title);
 			
 			this.options.beforeShow.apply(this);
@@ -154,6 +176,32 @@
 			}, options);
 			
 			this.show(content, options);
+		},
+		
+		'gallery': function(name, options) {
+			
+			var items   = $("[data-gal="+name+"]"),
+				options = options || {}, 
+				$this   = this;
+			
+			items.each(function(i){
+			
+				var item   = $(this),
+					target = item.attr("href");
+				
+				item.bind("click", function(e){
+				
+					e.preventDefault();
+					
+					$('<img src="'+target+'" />').bind("load", function(){
+					
+						$this.show(this, $.extend({},options,{
+							gallery: items,
+							gallery_current: i 
+						}));
+					});
+				});
+			});
 		},
         
         close: function(){
