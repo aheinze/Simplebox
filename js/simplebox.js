@@ -193,6 +193,8 @@
 				
 					e.preventDefault();
 					
+					$this.showOverlay();
+					
 					$('<img src="'+target+'" />').bind("load", function(){
 					
 						$this.show(this, $.extend({},options,{
@@ -284,8 +286,6 @@
         },
         
         showOverlay: function(){
-            
-            if(!this.box) {return;}
             
             if(!this.overlay && !$("#simplebox-overlay").length){
                 
